@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VideoAI Hub - Multi-Model AI Video Generator | Create Videos in Minutes</title>
+    <meta name="description" content="Generate professional AI videos with multiple models including Seedance, Kling, Veo, Sora and more. One platform, endless possibilities. Start free today.">
+    <meta name="keywords" content="AI video generator, text to video, Seedance, Kling, Veo, Sora, AI video maker, video creation">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://videoai.tools/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="VideoAI Hub - Multi-Model AI Video Generator">
+    <meta property="og:description" content="Generate professional AI videos with multiple models. One platform, endless possibilities.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://videoai.tools/">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="VideoAI Hub - Multi-Model AI Video Generator">
+    <meta name="twitter:description" content="Generate professional AI videos with multiple models. One platform, endless possibilities.">
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1a1a24;
+            --accent: #6366f1;
+            --accent-hover: #818cf8;
+            --accent-secondary: #22d3ee;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --text-muted: #6b6b7b;
+            --border: #2a2a3a;
+            --gradient: linear-gradient(135deg, #6366f1 0%, #22d3ee 100%);
+            --gradient-2: linear-gradient(135deg, #f97316 0%, #eab308 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 16px 0;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-cta {
+            display: flex;
+            gap: 12px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 13px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            right: -10%;
+            width: 60%;
+            height: 60%;
+            background: radial-gradient(circle, rgba(34, 211, 238, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        .hero-badge span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h1 {
+            font-size: clamp(40px, 8vw, 64px);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        h1 .highlight {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+            justify-content: center;
+            margin-top: 64px;
+            padding-top: 48px;
+            border-top: 1px solid var(--border);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 0;
+        }
+
+        h2 {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 18px;
+            margin-top: 16px;
+        }
+
+        /* Model Cards */
+        .model-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .model-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .model-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .model-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .model-card:hover::before {
+            opacity: 1;
+        }
+
+        .model-badge {
+            display: inline-block;
+            background: var(--gradient);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+        }
+
+        .model-card h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .model-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .model-features {
+            list-style: none;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .model-features li {
+            margin-bottom: 6px;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .model-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-secondary);
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 24px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .feature-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .feature-content h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .feature-content p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Pricing */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px 32px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--accent);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient);
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 16px;
+            border-radius: 100px;
+        }
+
+        .pricing-card h3 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .pricing-card .price {
+            font-size: 48px;
+            font-weight: 700;
+            margin: 24px 0;
+        }
+
+        .pricing-card .price span {
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        .pricing-features {
+            list-style: none;
+            text-align: left;
+            margin: 24px 0;
+            font-size: 14px;
+        }
+
+        .pricing-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--accent-secondary);
+            margin-right: 12px;
+        }
+
+        /* FAQ */
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 24px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            padding: 0 24px 24px;
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 36px;
+        }
+
+        .cta-links {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            max-width: 400px;
+            margin: 40px auto 0;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+
+            h2 {
+                font-size: 28px;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .hero {
+                padding: 100px 0 60px;
+            }
+
+            .hero-stats {
+                gap: 24px;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">VideoAI Hub</div>
+            <ul class="nav-links">
+                <li><a href="#models">Models</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+            <div class="nav-cta">
+                <a href="#pricing" class="btn btn-secondary btn-sm">Sign In</a>
+                <a href="#pricing" class="btn btn-primary btn-sm">Start Free</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span>NEW</span> Multi-Model AI Video Generation Platform
+                </div>
+                <h1>
+                    <span class="highlight">Multi-Model</span> AI Video<br>
+                    Generator Platform
+                </h1>
+                <p class="hero-subtitle">
+                    Create professional videos in minutes with our unified platform. Access Seedance, Kling, Veo, Sora and more — one subscription, endless possibilities.
+                </p>
+                <div class="hero-cta">
+                    <a href="#pricing" class="btn btn-primary">
+                        Start Creating Free
+                    </a>
+                    <a href="#models" class="btn btn-secondary">
+                        Explore Models
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">4+</div>
+                        <div class="stat-label">AI Models</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">50K+</div>
+                        <div class="stat-label">Videos Created</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">4.9/5</div>
+                        <div class="stat-label">User Rating</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Models Section -->
+    <section id="models">
+        <div class="container">
+            <div class="section-header">
+                <h2>Multiple AI Models, One Platform</h2>
+                <p>Access the latest video generation models without managing multiple subscriptions</p>
+            </div>
+            <div class="model-grid">
+                <div class="model-card">
+                    <span class="model-badge">ByteDance</span>
+                    <h3>Seedance 2.0</h3>
+                    <p>Latest generation video model from ByteDance with exceptional motion quality and visual fidelity.</p>
+                    <ul class="model-features">
+                        <li>1080p @ 30fps</li>
+                        <li>10s video generation</li>
+                        <li>Text & Image to Video</li>
+                        <li>Chinese optimized</li>
+                    </ul>
+                </div>
+                <div class="model-card">
+                    <span class="model-badge">Kuaishou</span>
+                    <h3>Kling 2.0</h3>
+                    <p>Professional-grade video generation from Kuaishou with cinematic quality outputs.</p>
+                    <ul class="model-features">
+                        <li>1080p @ 60fps</li>
+                        <li>Professional motion</li>
+                        <li>Style transfer</li>
+                        <li>Multi-aspect ratio</li>
+                    </ul>
+                </div>
+                <div class="model-card">
+                    <span class="model-badge">Google</span>
+                    <h3>Veo 3</h3>
+                    <p>Google's latest video generation model with state-of-the-art quality and understanding.</p>
+                    <ul class="model-features">
+                        <li>4K quality</li>
+                        <li>Advanced reasoning</li>
+                        <li>Cinematic output</li>
+                        <li>Long video support</li>
+                    </ul>
+                </div>
+                <div class="model-card">
+                    <span class="model-badge">OpenAI</span>
+                    <h3>Sora 2</h3>
+                    <p>OpenAI's video generation model known for realistic and creative outputs.</p>
+                    <ul class="model-features">
+                        <li>Realistic rendering</li>
+                        <li>Physics accurate</li>
+                        <li>Creative freedom</li>
+                        <li>Safety filtered</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose VideoAI Hub</h2>
+                <p>Everything you need to create professional videos</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <span class="feature-icon">🎯</span>
+                    <div class="feature-content">
+                        <h4>One-Stop Platform</h4>
+                        <p>No need to subscribe to multiple services. Access all major video AI models through a single account.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">⚡</span>
+                    <div class="feature-content">
+                        <h4>Fast Processing</h4>
+                        <p>Optimized infrastructure ensures your videos are generated in minutes, not hours.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">💰</span>
+                    <div class="feature-content">
+                        <h4>Cost Effective</h4>
+                        <p>Pay one subscription for access to all models. Save up to 80% compared to individual subscriptions.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🌐</span>
+                    <div class="feature-content">
+                        <h4>Global Access</h4>
+                        <p>Multi-language support with localized interface. Accept payments from 180+ countries.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🔒</span>
+                    <div class="feature-content">
+                        <h4>Secure & Private</h4>
+                        <p>Your data is encrypted and secure. We never store your generated videos.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🎨</span>
+                    <div class="feature-content">
+                        <h4>Easy to Use</h4>
+                        <p>No technical skills required. Simply describe what you want and let AI do the work.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Simple, Transparent Pricing</h2>
+                <p>Choose the plan that fits your needs</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Starter</h3>
+                    <div class="price">$14.90<span>/one-time</span></div>
+                    <p style="color: var(--text-muted); font-size: 14px;">100 credits, 1 year validity</p>
+                    <ul class="pricing-features">
+                        <li>100 video credits</li>
+                        <li>All AI models access</li>
+                        <li>720p video quality</li>
+                        <li>Email support</li>
+                        <li>Standard generation speed</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary" style="width: 100%;">Get Started</a>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>Professional</h3>
+                    <div class="price">$29.90<span>/month</span></div>
+                    <p style="color: var(--text-muted); font-size: 14px;">Best for creators & businesses</p>
+                    <ul class="pricing-features">
+                        <li>500 credits/month</li>
+                        <li>All AI models access</li>
+                        <li>1080p video quality</li>
+                        <li>Priority support</li>
+                        <li>Fast generation speed</li>
+                        <li>Commercial usage rights</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary" style="width: 100%;">Start Free Trial</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <div class="price">$79.90<span>/month</span></div>
+                    <p style="color: var(--text-muted); font-size: 14px;">For high-volume users</p>
+                    <ul class="pricing-features">
+                        <li>2000 credits/month</li>
+                        <li>All AI models access</li>
+                        <li>4K video quality</li>
+                        <li>24/7 dedicated support</li>
+                        <li>Instant generation speed</li>
+                        <li>Full commercial rights</li>
+                        <li>API access</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary" style="width: 100%;">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Everything you need to know</p>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Which AI models can I use?</span>
+                    </div>
+                    <div class="faq-answer">
+                        You get access to all major video AI models including Seedance, Kling, Veo, and Sora. Each plan includes a monthly credit allowance that can be used across any model.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How long does it take to generate a video?</span>
+                    </div>
+                    <div class="faq-answer">
+                        Generation time depends on the model and video length. Typically, a 5-second video takes 2-5 minutes to generate. Professional and Enterprise plans include priority processing for faster results.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I use generated videos commercially?</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, Professional and Enterprise plans include full commercial usage rights. You own the videos you create and can use them for business purposes, marketing, and client work.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What payment methods do you accept?</span>
+                    </div>
+                    <div class="faq-answer">
+                        We accept all major credit cards, PayPal, and various local payment methods through our payment partner Creem. All transactions are secure and encrypted.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I cancel anytime?</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, you can cancel your subscription at any time with no cancellation fees. Your credits remain valid until the end of your billing period.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Start Creating Videos Today</h2>
+            <p style="color: var(--text-secondary); margin-top: 16px;">Join thousands of creators using VideoAI Hub</p>
+            <div class="cta-links">
+                <a href="#pricing" class="btn btn-primary">Start Free Trial</a>
+                <a href="#models" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="logo" style="margin-bottom: 16px;">VideoAI Hub</div>
+            <p>Multi-Model AI Video Generation Platform</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact</a>
+            </div>
+            <p style="margin-top: 24px; color: var(--text-muted);">
+                This site is not affiliated with any AI model provider. All trademarks belong to their respective owners.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ toggle
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isOpen = answer.style.display !== 'none';
+                answer.style.display = isOpen ? 'none' : 'block';
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
